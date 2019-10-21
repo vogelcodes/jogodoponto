@@ -3,8 +3,15 @@ body{
     font-family: 'Nunito';
 }
 
-h2,h1{
+h2{
     font-size: 18px;
+    padding: 10px 20px;
+    color: #327a20;
+    margin: auto;
+    text-align: center;
+}
+h1{
+    font-size: 32px;
     padding: 10px 20px;
     color: #327a20;
     margin: auto;
