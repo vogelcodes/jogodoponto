@@ -1,38 +1,22 @@
+// Realiza o require do express, http, e socketio
 var app = require('express')();
-var http = require('http').createServer(app);
+// passa o express para o http-server
+var http = require('http').Server(app);
+// passa o http-server par ao socketio
 var io = require('socket.io')(http);
 
-
-//App start
-app.get('/', function (req, res){
-    res.sendFile(__dirname + '/public/index.html');
+// cria uma rota para fornecer o arquivo index.html
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/public/index.html');
 });
-
+// sempre que o socketio receber uma conexão vai devoltar realizar o broadcast dela
 io.on('connection', function(socket){
-    console.log('made socket connection', socket.id);
-});
-var port = process.env.PORT || 3000;
-var server = http.listen(port, function(){
-    console.log('listening to requests on port 3000');
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
 });
 
-//Static files
-
-app.use(express.static('public'));
-//Socket setup
-
-io.on('connection', function(socket){
-    console.log();
-    //Handle Chat event
-    io.on('chat', function(data){
-        io.sockets.emit('chat', data);
-    });
-
-    //Handle typing event
-    io.on('typing', function(data){
-        socket.broadcast.emit('typing', data)
-    });
-    io.on('cleartyping', function(data){
-        socket.broadcast.emit('typing', data)
-    });
+// inicia o servidor na porta informada, no caso vamo iniciar na porta 3000
+http.listen(3000, function(){
+  console.log('Servidor rodando em: http://localhost:3000');
 });
