@@ -5,8 +5,7 @@ var io = require('socket.io')(http);
 
 //App start
 app.get('/', function (req, res){
-    res.sendFile(__dirname + '/index.html');
-    res.sendFile(__dirname + '/styles.css');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 io.on('connection', function(socket){
@@ -19,8 +18,9 @@ var server = http.listen(port, function(){
 
 //Static files
 
-
+app.use(express.static('public'));
 //Socket setup
+
 io.on('connection', function(socket){
     console.log();
     //Handle Chat event
