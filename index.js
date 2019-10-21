@@ -1,31 +1,37 @@
-var express = require('express');
-var socket = require('socket.io');
+var app = require('express')();
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
 
 
 //App start
-var app = express();
+app.get('/', function (req, res){
+    res.sendFile(__dirname + '/index.html');
+});
+
+io.on('connection', function(socket){
+    console.log('made socket connection', socket.id);
+});
 var port = process.env.PORT || 3000;
-var server = app.listen(port, function(){
+var server = http.listen(port, function(){
     console.log('listening to requests on port 3000');
-})
+});
 
 //Static files
 
-app.use(express.static('public'));
+
 //Socket setup
-var io = socket(server);
 io.on('connection', function(socket){
-    console.log('made socket connection', socket.id);
+    console.log();
     //Handle Chat event
-    socket.on('chat', function(data){
+    io.on('chat', function(data){
         io.sockets.emit('chat', data);
     });
 
     //Handle typing event
-    socket.on('typing', function(data){
+    io.on('typing', function(data){
         socket.broadcast.emit('typing', data)
     });
-    socket.on('cleartyping', function(data){
-        socket.broadcast.emit('cleartyping', data)
+    io.on('cleartyping', function(data){
+        socket.broadcast.emit('typing', data)
     });
 });
