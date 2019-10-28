@@ -12,7 +12,7 @@ webApp.get('/', function(req, res){
 })
 
 // Coisas que só uma POC vai conhecer
-webApp.get('/a31ecc0596d72f84e5ee403ddcacb3dea94ce0803fc9e6dc2eca1fbabae49a3e3a31ecc0596d72f84e5ee40d0cacb3dea94ce0803fc9e6dc2ecfdfdbabae49a3e3', function(req, res){
+webApp.get('/matheus2018', function(req, res){
   res.sendFile(__dirname + '/game-admin.html')
 })
 
