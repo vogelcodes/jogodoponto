@@ -4,8 +4,7 @@
   "description": "Um jogo multiplayer bastante simples para testarmos o Socket.io",
   "scripts": {
     "client": "cd crew-games && cd client npm start",
-    "server": "node server.js",
-    
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
