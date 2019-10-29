@@ -119,7 +119,7 @@ io.on("connection", function(socket) {
 });
 
 webServer.listen(3000, function() {
-  console.log("> Server listening on port:");
+  console.log("> Server listening on port");
 });
 
 function createGame() {
