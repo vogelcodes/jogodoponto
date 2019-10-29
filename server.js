@@ -70,7 +70,13 @@ io.on("connection", function(socket) {
     socket.broadcast.emit("player-remove", socket.id);
   });
 
-  let fruitGameInterval;
+  let fruitGameInterval = setInterval(() => {
+    const fruitData = game.addFruit();
+
+    if (fruitData) {
+      io.emit("fruit-add", fruitData);
+    }
+  }, 2000);
   socket.on("admin-start-fruit-game", interval => {
     console.log("> Fruit Game start");
     clearInterval(fruitGameInterval);
