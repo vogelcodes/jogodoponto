@@ -30,6 +30,9 @@ setInterval(() => {
 
 io.on("connection", function(socket) {
   const admin = socket.handshake.query.admin;
+  if (gameStatus) {
+    socket.emit("admin-start-fruit-game", 2000);
+  }
 
   if (io.engine.clientsCount > maxConcurrentConnections && !admin) {
     socket.emit("show-max-concurrent-connections-message");
