@@ -37,13 +37,10 @@ io.on("connection", function(socket) {
     return;
   } else {
     socket.emit("hide-max-concurrent-connections-message");
+    socket.emit("admin-start-fruit-game", 2000);
   }
   const playerState = game.addPlayer(socket.id);
   socket.emit("bootstrap", game);
-
-  if (game.gameStatus) {
-    socket.emit("admin-start-fruit-game", 2000);
-  }
 
   socket.broadcast.emit("player-update", {
     socketId: socket.id,
