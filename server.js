@@ -23,7 +23,6 @@ webApp.get("/collect.mp3", function(req, res) {
 webApp.get("/100-collect.mp3", function(req, res) {
   res.sendFile(__dirname + "/100-collect.mp3");
 });
-socket.emit("admin-start-fruit-game", 2000);
 
 setInterval(() => {
   io.emit("concurrent-connections", io.engine.clientsCount);
