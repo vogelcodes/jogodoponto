@@ -91,6 +91,7 @@ io.on("connection", function(socket) {
   socket.on("admin-clear-fruit-game", () => {
     console.log("> Fruit Game clear");
     game.fruits = {};
+    io.emit("bootstrap", game);
   });
 
   socket.on("admin-start-crazy-mode", () => {
