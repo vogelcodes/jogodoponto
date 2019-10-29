@@ -70,29 +70,29 @@ io.on("connection", function(socket) {
     socket.broadcast.emit("player-remove", socket.id);
   });
 
-  let fruitGameInterval = setInterval(() => {
-    const fruitData = game.addFruit();
-
-    if (fruitData) {
-      io.emit("fruit-add", fruitData);
-    }
-  }, 2000);
+  let fruitGameInterval;
   socket.on("admin-start-fruit-game", interval => {
     console.log("> Fruit Game start");
     clearInterval(fruitGameInterval);
+    if (game.gameStatus) {
+      fruitGameInterval = setInterval(() => {
+        const fruitData = game.addFruit();
 
-    fruitGameInterval = setInterval(() => {
-      const fruitData = game.addFruit();
-
-      if (fruitData) {
-        io.emit("fruit-add", fruitData);
-      }
-    }, interval);
+        if (fruitData) {
+          io.emit("fruit-add", fruitData);
+        }
+      }, interval);
+    }
   });
 
   socket.on("admin-stop-fruit-game", () => {
     console.log("> Fruit Game stop");
     clearInterval(fruitGameInterval);
+    if (game.gameStatus) {
+      game.gameStatus = false;
+    } else {
+      game.gameStatus = true;
+    }
   });
   socket.on("admin-clear-fruit-game", () => {
     console.log("> Fruit Game clear");
@@ -131,6 +131,7 @@ function createGame() {
     canvasHeight: 30,
     players: {},
     fruits: {},
+    gameStatus: true,
     addPlayer,
     removePlayer,
     movePlayer,
