@@ -40,7 +40,6 @@ io.on("connection", function(socket) {
   }
   const playerState = game.addPlayer(socket.id);
   socket.emit("bootstrap", game);
-  socket.emit("admin-start-fruit-game", 2000);
 
   socket.broadcast.emit("player-update", {
     socketId: socket.id,
