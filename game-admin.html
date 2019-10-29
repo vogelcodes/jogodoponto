@@ -96,6 +96,7 @@
                     <input type="text" value=2000 id="fruitGameInterval"><br>
                     <button type="button" onclick="startFruitGame()">Start Fruits</button><br>
                     <button type="button" onclick="stopFruitGame()">Stop Fruits</button>
+                    <button type="button" onclick="clearFruitGame()">Clear Fruits</button>
                 </div> 
 
                 <br>
@@ -392,6 +393,10 @@
 
             function stopFruitGame() {
                 socket.emit('admin-stop-fruit-game')
+            }
+
+            function clearFruitGame() {
+                socket.emit('admin-clear-fruit-game')
             }
 
             function startCrazyMode() {

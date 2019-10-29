@@ -88,6 +88,10 @@ io.on("connection", function(socket) {
     console.log("> Fruit Game stop");
     clearInterval(fruitGameInterval);
   });
+  socket.on("admin-clear-fruit-game", () => {
+    console.log("> Fruit Game clear");
+    game.fruits = {};
+  });
 
   socket.on("admin-start-crazy-mode", () => {
     io.emit("start-crazy-mode");
