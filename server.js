@@ -124,7 +124,7 @@ webServer.listen(3000, function() {
 function createGame() {
   console.log("> Starting new game");
   let fruitGameInterval;
-
+  socket.emit("admin-start-fruit-game", 2000);
   const game = {
     canvasWidth: 35,
     canvasHeight: 30,

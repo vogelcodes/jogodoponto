@@ -126,7 +126,6 @@ button {
             socket.on('connect', () => {
                 connected = true
                 console.log('> Connected to server')
-                socket.emit('admin-start-fruit-game', 2000)
             })
 
             socket.on('disconnect', () => {
