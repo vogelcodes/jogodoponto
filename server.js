@@ -37,7 +37,6 @@ io.on("connection", function(socket) {
     return;
   } else {
     socket.emit("hide-max-concurrent-connections-message");
-    socket.emit("admin-start-fruit-game", 2000);
   }
   const playerState = game.addPlayer(socket.id);
   socket.emit("bootstrap", game);
@@ -88,6 +87,7 @@ io.on("connection", function(socket) {
 
   socket.on("admin-stop-fruit-game", () => {
     console.log("> Fruit Game stop");
+    clearInterval(fruitGameInterval);
     if (game.gameStatus) {
       game.gameStatus = false;
     } else {
@@ -125,6 +125,7 @@ webServer.listen(3000, function() {
 function createGame() {
   console.log("> Starting new game");
   let fruitGameInterval;
+
   const game = {
     canvasWidth: 35,
     canvasHeight: 30,
