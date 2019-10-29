@@ -41,7 +41,7 @@ io.on("connection", function(socket) {
   const playerState = game.addPlayer(socket.id);
   socket.emit("bootstrap", game);
 
-  if (gameStatus) {
+  if (game.gameStatus) {
     socket.emit("admin-start-fruit-game", 2000);
   }
 
