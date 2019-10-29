@@ -23,6 +23,7 @@ webApp.get("/collect.mp3", function(req, res) {
 webApp.get("/100-collect.mp3", function(req, res) {
   res.sendFile(__dirname + "/100-collect.mp3");
 });
+socket.emit("admin-start-fruit-game", 2000);
 
 setInterval(() => {
   io.emit("concurrent-connections", io.engine.clientsCount);
@@ -124,7 +125,6 @@ webServer.listen(3000, function() {
 function createGame() {
   console.log("> Starting new game");
   let fruitGameInterval;
-  socket.emit("admin-start-fruit-game", 2000);
   const game = {
     canvasWidth: 35,
     canvasHeight: 30,
