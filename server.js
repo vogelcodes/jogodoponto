@@ -87,7 +87,6 @@ io.on("connection", function(socket) {
 
   socket.on("admin-stop-fruit-game", () => {
     console.log("> Fruit Game stop");
-    clearInterval(fruitGameInterval);
     if (game.gameStatus) {
       game.gameStatus = false;
     } else {
